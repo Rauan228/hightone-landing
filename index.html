@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<title>Hightone Group — премиальные натяжные потолки, Астана</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+html{scroll-behavior:smooth}
+body{margin:0;background:#0B0B0C;color:#F2EEE6;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+*{box-sizing:border-box}
+a{color:#E8C77A;text-decoration:none}
+a:hover{color:#F4DDA0}
+button{font-family:'Montserrat',sans-serif}
+::selection{background:#C9A04A;color:#0B0B0C}
+@keyframes ht-shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+@keyframes ht-draw{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes ht-marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes ht-pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,160,74,.5)}50%{box-shadow:0 0 0 14px rgba(201,160,74,0)}}
+@keyframes ht-glow{0%,100%{opacity:.35}50%{opacity:.7}}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:28px;background:transparent;margin:0}
+input[type=range]::-webkit-slider-runnable-track{height:2px;background:rgba(201,160,74,.25)}
+input[type=range]::-moz-range-track{height:2px;background:rgba(201,160,74,.25)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-10px;border-radius:50%;background:#0B0B0C;border:2px solid #E8C77A;box-shadow:0 0 14px rgba(232,199,122,.45);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:#0B0B0C;border:2px solid #E8C77A;cursor:pointer}
+input[type=range]::-moz-range-progress{height:2px;background:#E8C77A}
+</style>
+</helmet>
+
+<header style="position:fixed;top:0;left:0;right:0;z-index:50;transition:background .4s, border-color .4s;background:{{ headerBg }};backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid {{ headerBorder }}">
+  <div style="max-width:1280px;margin:0 auto;padding:14px clamp(18px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:20px">
+    <a href="#top" onClick="{{ closeMenu }}" style="display:flex;align-items:center;gap:12px;color:#F2EEE6;flex:none">
+      <div style="width:30px;height:40px;background:url(assets/logo.png) -59.5px -31px / 145px auto no-repeat;mix-blend-mode:lighten;flex:none"></div>
+      <div style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-size:14px;font-weight:600;letter-spacing:.3em">HIGHTONE</span>
+        <span style="font-size:9px;font-weight:500;letter-spacing:.6em;color:#C9A04A;margin-top:5px">GROUP</span>
+      </div>
+    </a>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display:flex;align-items:center;gap:30px;white-space:nowrap;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase">
+        <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+          <a href="{{ n.href }}" style="color:#CFC9BE" style-hover="color:#E8C77A">{{ n.label }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div style="position:relative;display:flex;border:1px solid rgba(201,160,74,.35);height:40px;padding:3px">
+        <span style="position:absolute;top:3px;bottom:3px;left:3px;width:44px;background:linear-gradient(100deg,#B98E3C,#E8C77A 55%,#C9A04A);box-shadow:0 0 16px rgba(232,199,122,.35);transform:{{ langPill }};transition:transform .55s cubic-bezier(.77,0,.18,1)"></span>
+        <button onClick="{{ setRu }}" style="position:relative;width:44px;background:none;color:{{ ruColor }};border:none;font-size:11px;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:color .45s ease .1s">RU</button>
+        <button onClick="{{ setKz }}" style="position:relative;width:44px;background:none;color:{{ kzColor }};border:none;font-size:11px;font-weight:600;letter-spacing:.1em;cursor:pointer;transition:color .45s ease .1s">ҚАЗ</button>
+      </div>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <a href="https://wa.me/77783647371" target="_blank" style="white-space:nowrap;height:40px;display:flex;align-items:center;padding:0 18px;border:1px solid rgba(201,160,74,.55);color:#E8C77A;font-size:12px;font-weight:500;letter-spacing:.1em;transition:all .3s" style-hover="background:#C9A04A;color:#0B0B0C">+7 778 364 7371</a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="position:relative;width:44px;height:40px;background:none;border:1px solid rgba(201,160,74,.35);cursor:pointer">
+          <span style="position:absolute;left:12px;top:14px;width:18px;height:1.5px;background:#E8C77A;transition:transform .45s cubic-bezier(.77,0,.18,1);transform:{{ b1 }}"></span>
+          <span style="position:absolute;left:12px;top:19px;width:18px;height:1.5px;background:#E8C77A;transition:opacity .25s, transform .45s;opacity:{{ b2 }};transform:{{ b2t }}"></span>
+          <span style="position:absolute;left:12px;top:24px;width:18px;height:1.5px;background:#E8C77A;transition:transform .45s cubic-bezier(.77,0,.18,1);transform:{{ b3 }}"></span>
+        </button>
+      </sc-if>
+    </div>
+  </div>
+</header>
+
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:45;background:#0B0B0C;clip-path:{{ menuClip }};transition:clip-path .7s cubic-bezier(.77,0,.18,1);pointer-events:{{ menuPE }};display:flex;flex-direction:column;justify-content:space-between;padding:108px 24px 32px;overflow-y:auto">
+    <div style="position:absolute;top:-10%;right:-30%;width:500px;height:500px;background:radial-gradient(circle, rgba(201,160,74,.14), rgba(201,160,74,0) 65%);pointer-events:none"></div>
+    <nav style="position:relative;display:flex;flex-direction:column">
+      <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="6">
+        <a href="{{ m.href }}" onClick="{{ closeMenu }}" style="display:flex;align-items:baseline;gap:16px;padding:16px 0;border-bottom:1px solid rgba(201,160,74,.14);color:#F2EEE6;font-size:24px;font-weight:600;letter-spacing:-.01em;opacity:{{ m.op }};transform:{{ m.tf }};transition:opacity .5s ease, transform .6s cubic-bezier(.2,.7,.2,1);transition-delay:{{ m.delay }}">
+          <span style="font-size:11px;font-weight:500;letter-spacing:.2em;color:#C9A04A;width:22px">{{ m.n }}</span>
+          <span>{{ m.label }}</span>
+        </a>
+      </sc-for>
+    </nav>
+    <div style="position:relative;display:flex;flex-direction:column;gap:10px;margin-top:32px;opacity:{{ menuFootOp }};transform:{{ menuFootTf }};transition:opacity .5s ease .5s, transform .6s cubic-bezier(.2,.7,.2,1) .5s">
+      <a href="https://wa.me/77783647371" target="_blank" style="display:flex;justify-content:center;align-items:center;min-height:54px;background:#C9A04A;color:#0B0B0C;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase">WhatsApp · +7 778 364 7371</a>
+      <a href="https://instagram.com/hightone.group" target="_blank" style="display:flex;justify-content:center;align-items:center;min-height:54px;border:1px solid rgba(201,160,74,.45);color:#E8C77A;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase">Instagram · @hightone.group</a>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ small }}" hint-placeholder-val="{{ false }}">
+<section id="top" data-screen-label="01 Hero mobile" style="position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:100px 22px 34px">
+  <div style="position:absolute;inset:0 0 38% 0">
+    <image-slot id="hero-mobile" src="assets/photos/hero.jpg" shape="rect" fit="cover" placeholder="Фото готового потолка"></image-slot>
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg, rgba(11,11,12,.7) 0%, rgba(11,11,12,0) 20%, rgba(11,11,12,.1) 36%, rgba(11,11,12,.9) 56%, #0B0B0C 63%);pointer-events:none"></div>
+  <div style="position:relative;display:flex;flex-direction:column;gap:26px;pointer-events:none">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:center;gap:10px;font-size:10px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:#C9A04A">
+        <span style="width:7px;height:7px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span>
+        <span>Hightone · Астана</span>
+      </div>
+      <h1 style="margin:0;font-weight:600;font-size:clamp(28px,8vw,36px);line-height:1.08;letter-spacing:-.02em">{{ t.heroA }}<br><span style="background:linear-gradient(100deg,#9C7A35 0%,#E8C77A 35%,#C9A04A 55%,#F4DDA0 80%,#9C7A35 100%);-webkit-background-clip:text;background-clip:text;color:transparent">{{ t.heroB }}</span></h1>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;padding:16px 0;border-top:1px solid rgba(201,160,74,.22);border-bottom:1px solid rgba(201,160,74,.22)">
+      <span style="font-size:10px;font-weight:600;letter-spacing:.2em;line-height:1.5;text-transform:uppercase;color:#A39E94;max-width:110px">{{ t.priceLabel }}</span>
+      <div style="display:flex;align-items:baseline;gap:6px;min-width:0">
+        <span style="font-size:12px;color:#A39E94;white-space:nowrap">{{ t.pricePre }}</span>
+        <span style="font-size:clamp(22px,6.4vw,28px);font-weight:600;line-height:1;color:#E8C77A;white-space:nowrap">{{ t.priceVal }}</span>
+        <span style="font-size:12px;color:#A39E94;white-space:nowrap">{{ t.pricePost }}</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;pointer-events:auto">
+      <a href="#calc" style="align-self:stretch;display:flex;justify-content:center;align-items:center;min-height:58px;background:linear-gradient(100deg,#B98E3C,#E8C77A 50%,#B98E3C);color:#0B0B0C;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase">{{ t.ctaCalc }}</a>
+      <a href="https://wa.me/77783647371" target="_blank" style="display:flex;align-items:center;gap:10px;min-height:44px;color:#E4DFD5;font-size:12px;font-weight:500;letter-spacing:.16em;text-transform:uppercase">{{ t.ctaMeasure }} <span style="color:#E8C77A">→</span></a>
+    </div>
+  </div>
+</section>
+</sc-if>
+<sc-if value="{{ notSmall }}" hint-placeholder-val="{{ true }}">
+<section id="top" data-screen-label="01 Hero" style="position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:{{ heroPad }}">
+  <div style="position:absolute;top:-20%;left:50%;width:1100px;height:700px;transform:translateX(-50%);background:radial-gradient(ellipse at center, rgba(201,160,74,.16), rgba(201,160,74,0) 60%);pointer-events:none"></div>
+  {{ heroLines }}
+  <div style="position:relative;max-width:1280px;width:100%;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:clamp(40px,6vw,80px);align-items:center">
+    <div style="display:flex;flex-direction:column;gap:clamp(20px,3vw,28px)">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.22em;line-height:1.6;text-transform:uppercase;color:#C9A04A">
+        <span style="width:8px;height:8px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span>
+        <span>{{ t.heroEyebrow }}</span>
+      </div>
+      <h1 style="margin:0;font-family:'Montserrat',sans-serif;font-weight:600;font-size:clamp(34px,5.6vw,76px);line-height:1.06;letter-spacing:-.02em;text-wrap:balance">{{ t.heroA }} <span style="background:linear-gradient(100deg,#9C7A35 0%,#E8C77A 35%,#C9A04A 55%,#F4DDA0 80%,#9C7A35 100%);-webkit-background-clip:text;background-clip:text;color:transparent">{{ t.heroB }}</span></h1>
+      <p style="margin:0;font-size:12px;font-weight:500;letter-spacing:.24em;line-height:1.7;text-transform:uppercase;color:#A39E94">{{ t.heroSub }}</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:12px 24px;max-width:540px">
+        <sc-for list="{{ t.bullets }}" as="bl" hint-placeholder-count="4">
+          <div style="display:flex;align-items:center;gap:12px;font-size:15px;color:#E4DFD5"><span style="width:7px;height:7px;transform:rotate(45deg);background:#C9A04A;flex:none"></span>{{ bl }}</div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;padding:20px 0 4px;border-top:1px solid rgba(201,160,74,.18);max-width:540px">
+        <span style="font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:#A39E94">{{ t.priceLabel }}</span>
+        <div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <span style="font-size:15px;color:#A39E94;white-space:nowrap">{{ t.pricePre }}</span>
+          <span style="font-size:clamp(36px,4vw,52px);font-weight:600;line-height:1;color:#E8C77A;white-space:nowrap">{{ t.priceVal }}</span>
+          <span style="font-size:15px;color:#A39E94;white-space:nowrap">{{ t.pricePost }}</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <a href="#calc" style="flex:1 1 220px;max-width:280px;display:flex;justify-content:center;align-items:center;white-space:nowrap;min-height:56px;padding:0 26px;background:linear-gradient(100deg,#B98E3C,#E8C77A 50%,#B98E3C);background-size:200% 100%;color:#0B0B0C;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:background-position .6s" style-hover="background-position:100% 0;color:#0B0B0C">{{ t.ctaCalc }}</a>
+        <a href="https://wa.me/77783647371" target="_blank" style="flex:1 1 220px;max-width:280px;display:flex;justify-content:center;align-items:center;white-space:nowrap;min-height:56px;padding:0 26px;border:1px solid rgba(242,238,230,.25);color:#F2EEE6;font-size:12px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:border-color .3s" style-hover="border-color:#C9A04A;color:#E8C77A">{{ t.ctaMeasure }}</a>
+      </div>
+    </div>
+    <div style="position:relative;aspect-ratio:{{ heroAspect }};max-height:72vh;width:100%">
+      <div style="position:absolute;inset:-12px 12px 12px -12px;border:1px solid rgba(201,160,74,.4);pointer-events:none"></div>
+      <div style="position:absolute;inset:0">
+        <image-slot id="hero-desktop" src="assets/photos/hero.jpg" shape="rect" fit="cover" placeholder="Фото готового потолка"></image-slot>
+      </div>
+      <div style="position:absolute;right:-1px;bottom:24px;background:#0B0B0C;border:1px solid rgba(201,160,74,.45);padding:14px 18px;display:flex;flex-direction:column;gap:4px;pointer-events:none">
+        <span style="font-size:10px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:#C9A04A">Hightone Group</span>
+        <span style="font-size:15px;font-weight:600">{{ t.heroBadge }}</span>
+      </div>
+    </div>
+  </div>
+</section>
+</sc-if>
+
+<div style="border-top:1px solid rgba(201,160,74,.2);border-bottom:1px solid rgba(201,160,74,.2);overflow:hidden;padding:20px 0;background:#0E0E0F">
+  {{ marquee }}
+</div>
+
+<section data-screen-label="02 Pillars" style="padding:{{ secPad }}">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:1px;background:rgba(201,160,74,.18);border:1px solid rgba(201,160,74,.18)">
+    <sc-for list="{{ t.pillars }}" as="p" hint-placeholder-count="4">
+      <div data-reveal="1" style="background:#0B0B0C;padding:clamp(26px,3vw,40px) clamp(22px,3vw,32px);display:flex;flex-direction:column;gap:14px;transition:background .4s" style-hover="background:#121212">
+        <span style="font-size:28px;font-weight:600;line-height:1;color:#C9A04A">{{ p.n }}</span>
+        <h3 style="margin:0;font-size:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase">{{ p.t }}</h3>
+        <p style="margin:0;font-size:14px;line-height:1.7;color:#A39E94;text-wrap:pretty">{{ p.d }}</p>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="catalog" data-screen-label="03 Catalog" style="padding:0 0 clamp(72px,10vw,140px)">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(18px,4vw,48px)">
+    <div data-reveal="1" style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:32px">
+      <div style="display:flex;flex-direction:column;gap:16px;max-width:640px">
+        <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#C9A04A"><span style="width:8px;height:8px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span><span style="white-space:nowrap">{{ t.catEyebrow }}</span><span style="width:48px;flex:none;height:1px;background:linear-gradient(90deg,#C9A04A,rgba(201,160,74,0))"></span></div>
+        <h2 style="margin:0;font-weight:600;letter-spacing:-.01em;font-size:clamp(28px,4vw,52px);line-height:1.1;text-wrap:balance">{{ t.catTitleA }} <span style="color:#E8C77A">{{ t.catTitleB }}</span></h2>
+      </div>
+      <p style="margin:0;max-width:360px;font-size:14px;line-height:1.7;color:#A39E94">{{ t.catNote }}</p>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:24px">
+      <div style="display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-right:-18px;padding-right:18px">
+        <sc-for list="{{ catFilters }}" as="cf" hint-placeholder-count="4">
+          <button onClick="{{ cf.select }}" style="flex:none;min-height:44px;padding:0 18px;background:{{ cf.bg }};color:{{ cf.color }};border:1px solid {{ cf.border }};font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .3s;white-space:nowrap">{{ cf.label }} <span style="opacity:.6;font-weight:500;margin-left:4px">{{ cf.count }}</span></button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ showArrows }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:8px;flex:none">
+          <button onClick="{{ catPrev }}" aria-label="Prev" style="width:52px;height:52px;background:none;border:1px solid rgba(201,160,74,.45);color:#E8C77A;font-size:20px;cursor:pointer;transition:all .3s" style-hover="background:#C9A04A;color:#0B0B0C">←</button>
+          <button onClick="{{ catNext }}" aria-label="Next" style="width:52px;height:52px;background:none;border:1px solid rgba(201,160,74,.45);color:#E8C77A;font-size:20px;cursor:pointer;transition:all .3s" style-hover="background:#C9A04A;color:#0B0B0C">→</button>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+<sc-if value="{{ useShowcase }}" hint-placeholder-val="{{ true }}">
+  <div style="max-width:1280px;margin:0 auto;padding:0 clamp(20px,4vw,48px);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:48px;align-items:start">
+    <div style="display:flex;flex-direction:column;border-top:1px solid rgba(201,160,74,.2)">
+      <sc-for list="{{ showList }}" as="c" hint-placeholder-count="12">
+        <button onMouseEnter="{{ c.select }}" onClick="{{ c.select }}" style="display:flex;align-items:center;gap:16px;min-height:58px;padding:0 16px;background:{{ c.rowBg }};border:none;border-bottom:1px solid rgba(201,160,74,.14);color:{{ c.rowColor }};cursor:pointer;text-align:left;transition:background .3s, color .3s">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.14em;color:#C9A04A;width:22px;flex:none">{{ c.num }}</span>
+          <span style="font-size:16px;font-weight:600;flex:1">{{ c.name }}</span>
+          <span style="font-size:14px;font-weight:500;white-space:nowrap;opacity:.85">{{ c.pre }} {{ c.price }}</span>
+          <span style="width:18px;flex:none;color:#E8C77A;transition:transform .3s, opacity .3s;opacity:{{ c.arrowOp }};transform:{{ c.arrowTf }}">→</span>
+        </button>
+      </sc-for>
+    </div>
+    <div style="position:sticky;top:100px;display:flex;flex-direction:column;gap:24px">
+      <div style="position:relative;aspect-ratio:4/3;border:1px solid rgba(201,160,74,.25);overflow:hidden">
+        <sc-for list="{{ showList }}" as="c" hint-placeholder-count="1">
+          <div style="position:absolute;inset:0;opacity:{{ c.op }};pointer-events:{{ c.pe }};transform:{{ c.imgTf }};transition:opacity .6s ease, transform 1.2s cubic-bezier(.2,.7,.2,1)">
+            <image-slot id="{{ c.id }}" src="{{ c.src }}" shape="rect" fit="cover" placeholder="{{ c.ph }}"></image-slot>
+          </div>
+        </sc-for>
+        <span style="position:absolute;top:16px;left:16px;padding:7px 12px;background:rgba(11,11,12,.85);border:1px solid rgba(201,160,74,.4);font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#E8C77A;pointer-events:none">{{ sel.tag }}</span>
+        <span style="position:absolute;top:16px;right:16px;font-size:12px;font-weight:600;letter-spacing:.14em;color:#E8C77A;pointer-events:none">{{ sel.num }} / {{ showTotal }}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:32px">
+        <div style="display:flex;flex-direction:column;gap:12px;max-width:440px">
+          <h3 style="margin:0;font-size:28px;font-weight:600;line-height:1.15">{{ sel.name }}</h3>
+          <p style="margin:0;font-size:14.5px;line-height:1.7;color:#A39E94;text-wrap:pretty">{{ sel.desc }}</p>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:14px;flex:none">
+          <div style="display:flex;align-items:baseline;gap:8px">
+            <span style="font-size:13px;color:#A39E94">{{ sel.pre }}</span>
+            <span style="font-size:30px;font-weight:600;color:#E8C77A;white-space:nowrap">{{ sel.price }}</span>
+          </div>
+          <span style="font-size:12px;color:#A39E94">{{ sel.unit }}</span>
+          <a href="{{ sel.wa }}" target="_blank" style="display:flex;align-items:center;min-height:48px;padding:0 20px;border:1px solid rgba(201,160,74,.55);color:#E8C77A;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;transition:all .3s" style-hover="background:#C9A04A;color:#0B0B0C">{{ t.ask }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{ useCarousel }}" hint-placeholder-val="{{ false }}">
+  <div ref="{{ catRef }}" onScroll="{{ catScroll }}" style="display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding:4px max(clamp(18px,4vw,48px), calc((100vw - 1280px) / 2 + 48px)) 8px;scroll-padding:0 max(clamp(18px,4vw,48px), calc((100vw - 1280px) / 2 + 48px))">
+    <sc-for list="{{ catalog }}" as="c" hint-placeholder-count="4">
+      <article style="flex:0 0 {{ cardW }};scroll-snap-align:start;display:flex;flex-direction:column;background:#111112;border:1px solid rgba(201,160,74,.16);transition:border-color .4s" style-hover="border-color:rgba(201,160,74,.6)">
+        <div style="position:relative;aspect-ratio:4/3">
+          <image-slot id="{{ c.id }}-card" src="{{ c.src }}" shape="rect" fit="cover" placeholder="{{ c.ph }}"></image-slot>
+          <span style="position:absolute;top:12px;left:12px;padding:6px 10px;background:rgba(11,11,12,.85);border:1px solid rgba(201,160,74,.35);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:#E8C77A;pointer-events:none">{{ c.tag }}</span>
+        </div>
+        <div style="padding:20px 20px 22px;display:flex;flex-direction:column;gap:10px;flex:1">
+          <h3 style="margin:0;font-size:18px;font-weight:600;line-height:1.25">{{ c.name }}</h3>
+          <p style="margin:0;font-size:13px;line-height:1.6;color:#A39E94;flex:1;text-wrap:pretty">{{ c.desc }}</p>
+          <div style="display:flex;align-items:baseline;gap:8px;padding-top:14px;border-top:1px solid rgba(201,160,74,.14)">
+            <span style="font-size:12px;color:#A39E94">{{ c.pre }}</span>
+            <span style="font-size:20px;font-weight:600;color:#E8C77A;white-space:nowrap">{{ c.price }}</span>
+            <span style="font-size:12px;color:#A39E94;margin-left:auto;white-space:nowrap">{{ c.unit }}</span>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </div>
+  <div style="max-width:1280px;margin:20px auto 0;padding:0 clamp(18px,4vw,48px);display:flex;align-items:center;gap:16px">
+    <div style="flex:1;height:2px;background:rgba(201,160,74,.15);position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;bottom:0;left:{{ catBarLeft }};width:{{ catBarW }};background:#E8C77A;transition:left .2s, width .3s"></div>
+    </div>
+    <span style="font-size:12px;font-weight:500;letter-spacing:.1em;color:#A39E94;white-space:nowrap">{{ catCounter }}</span>
+  </div>
+</sc-if>
+</section>
+
+<section id="ba" data-screen-label="04 Before After" style="padding:{{ secPad }};background:#0E0E0F;border-top:1px solid rgba(201,160,74,.15)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px;margin-bottom:32px;max-width:720px">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#C9A04A"><span style="width:8px;height:8px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span><span style="white-space:nowrap">{{ t.baEyebrow }}</span><span style="width:48px;flex:none;height:1px;background:linear-gradient(90deg,#C9A04A,rgba(201,160,74,0))"></span></div>
+      <h2 style="margin:0;font-weight:600;letter-spacing:-.01em;font-size:clamp(28px,4vw,52px);line-height:1.1;text-wrap:balance">{{ t.baTitleA }} <span style="color:#E8C77A">{{ t.baTitleB }}</span></h2>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:#A39E94">{{ t.baHint }}</p>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+      <sc-for list="{{ baTabs }}" as="bt" hint-placeholder-count="3">
+        <button onClick="{{ bt.select }}" style="min-height:44px;padding:0 20px;background:{{ bt.bg }};color:{{ bt.color }};border:1px solid rgba(201,160,74,.45);font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .3s">{{ bt.title }}</button>
+      </sc-for>
+    </div>
+    <sc-for list="{{ baItems }}" as="b" hint-placeholder-count="1">
+      <div style="display:{{ b.display }};flex-direction:column;gap:18px">
+        <div style="position:relative;aspect-ratio:{{ baAspect }};width:100%;overflow:hidden;border:1px solid rgba(201,160,74,.25);user-select:none">
+          <div style="position:absolute;inset:0">
+            <image-slot id="{{ b.afterId }}" src="{{ b.afterSrc }}" shape="rect" fit="cover" placeholder="{{ t.phAfter }}"></image-slot>
+          </div>
+          <div style="position:absolute;inset:0;clip-path:{{ baClip }}">
+            <image-slot id="{{ b.beforeId }}" src="{{ b.beforeSrc }}" shape="rect" fit="cover" placeholder="{{ t.phBefore }}"></image-slot>
+          </div>
+          <span style="position:absolute;top:14px;left:14px;padding:7px 12px;background:rgba(11,11,12,.85);font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#F2EEE6;pointer-events:none">{{ t.before }}</span>
+          <span style="position:absolute;top:14px;right:14px;padding:7px 12px;background:#C9A04A;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#0B0B0C;font-weight:600;pointer-events:none">{{ t.after }}</span>
+          <div onPointerDown="{{ baDown }}" onPointerMove="{{ baMove }}" onPointerUp="{{ baUp }}" onPointerCancel="{{ baUp }}" style="position:absolute;top:0;bottom:0;left:{{ baLeft }};width:48px;margin-left:-24px;cursor:ew-resize;touch-action:none;display:flex;justify-content:center;z-index:3">
+            <div style="width:2px;height:100%;background:#E8C77A;box-shadow:0 0 18px rgba(232,199,122,.6)"></div>
+            <div style="position:absolute;top:50%;left:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:#0B0B0C;border:1px solid #E8C77A;display:flex;align-items:center;justify-content:center;gap:8px;color:#E8C77A;font-size:14px">
+              <span>‹</span><span>›</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;align-items:baseline">
+          <h3 style="margin:0;font-weight:600;font-size:22px">{{ b.title }}</h3>
+          <span style="font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#C9A04A">{{ b.note }}</span>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<section id="calc" data-screen-label="05 Calculator" style="padding:{{ secPad }}">
+  <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(32px,6vw,80px);align-items:start">
+    <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#C9A04A"><span style="width:8px;height:8px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span><span style="white-space:nowrap">{{ t.calcEyebrow }}</span><span style="width:48px;flex:none;height:1px;background:linear-gradient(90deg,#C9A04A,rgba(201,160,74,0))"></span></div>
+      <h2 style="margin:0;font-weight:600;letter-spacing:-.01em;font-size:clamp(28px,4vw,52px);line-height:1.1;text-wrap:balance">{{ t.calcTitleA }} <span style="color:#E8C77A">{{ t.calcTitleB }}</span></h2>
+      <p style="margin:0;font-size:14px;line-height:1.7;color:#A39E94;max-width:440px">{{ t.calcText }}</p>
+    </div>
+    <div data-reveal="1" style="background:#111112;border:1px solid rgba(201,160,74,.2);display:flex;flex-direction:column">
+      <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:14px;border-bottom:1px solid rgba(201,160,74,.12)">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#CFC9BE">{{ t.area }}</span>
+          <div style="display:flex;align-items:center;gap:6px">
+            <button onClick="{{ areaDec }}" aria-label="-" style="width:40px;height:40px;background:none;border:1px solid rgba(201,160,74,.35);color:#E8C77A;font-size:18px;cursor:pointer">−</button>
+            <span style="min-width:96px;text-align:center;font-size:24px;font-weight:600;white-space:nowrap">{{ area }} м²</span>
+            <button onClick="{{ areaInc }}" aria-label="+" style="width:40px;height:40px;background:none;border:1px solid rgba(201,160,74,.35);color:#E8C77A;font-size:18px;cursor:pointer">+</button>
+          </div>
+        </div>
+        <input type="range" min="5" max="150" value="{{ area }}" onChange="{{ setArea }}" style="background:linear-gradient(90deg,#E8C77A {{ areaPct }}, transparent {{ areaPct }}) no-repeat center / 100% 2px">
+      </div>
+      <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:14px;border-bottom:1px solid rgba(201,160,74,.12)">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#CFC9BE">{{ t.canvas }}</span>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+          <sc-for list="{{ typeOpts }}" as="o" hint-placeholder-count="4">
+            <button onClick="{{ o.select }}" style="min-height:68px;padding:12px 14px;background:{{ o.bg }};color:{{ o.color }};border:1px solid {{ o.border }};text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:4px;transition:all .25s">
+              <span style="font-size:14px;font-weight:600">{{ o.n }}</span>
+              <span style="font-size:12px;font-weight:500;opacity:.8;white-space:nowrap">{{ o.p }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:14px;border-bottom:1px solid rgba(201,160,74,.12)">
+        <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#CFC9BE">{{ t.edge }}</span>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">
+          <sc-for list="{{ profOpts }}" as="o" hint-placeholder-count="3">
+            <button onClick="{{ o.select }}" style="min-height:68px;padding:12px 10px;background:{{ o.bg }};color:{{ o.color }};border:1px solid {{ o.border }};text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:4px;transition:all .25s">
+              <span style="font-size:14px;font-weight:600">{{ o.n }}</span>
+              <span style="font-size:11px;font-weight:500;opacity:.8">{{ o.p }}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <div style="padding:clamp(20px,3vw,32px);display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid rgba(201,160,74,.12)">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#CFC9BE">{{ t.lightsLabel }}</span>
+          <span style="font-size:12px;color:#A39E94">{{ t.lightsPrice }}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px">
+          <button onClick="{{ lightsDec }}" aria-label="-" style="width:40px;height:40px;background:none;border:1px solid rgba(201,160,74,.35);color:#E8C77A;font-size:18px;cursor:pointer">−</button>
+          <span style="min-width:44px;text-align:center;font-size:20px;font-weight:600">{{ lights }}</span>
+          <button onClick="{{ lightsInc }}" aria-label="+" style="width:40px;height:40px;background:none;border:1px solid rgba(201,160,74,.35);color:#E8C77A;font-size:18px;cursor:pointer">+</button>
+        </div>
+      </div>
+      <div style="padding:clamp(20px,3vw,32px);display:flex;flex-direction:column;gap:16px;background:linear-gradient(180deg,rgba(201,160,74,.08),rgba(201,160,74,.02))">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap">
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <span style="font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#A39E94">{{ t.total }}</span>
+            <span style="font-size:clamp(34px,4vw,46px);font-weight:600;line-height:1;color:#E8C77A;white-space:nowrap">{{ total }} ₸</span>
+          </div>
+          <span style="font-size:12px;line-height:1.6;color:#A39E94;text-align:right">{{ breakdown }}</span>
+        </div>
+        <a href="{{ waCalc }}" target="_blank" style="display:flex;justify-content:center;align-items:center;min-height:56px;background:#C9A04A;color:#0B0B0C;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:0 16px;transition:background .3s" style-hover="background:#E8C77A;color:#0B0B0C">{{ t.sendCalc }}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="process" data-screen-label="06 Process" style="padding:{{ secPad }};background:#0E0E0F;border-top:1px solid rgba(201,160,74,.15)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px;margin-bottom:clamp(36px,5vw,64px)">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#C9A04A"><span style="width:8px;height:8px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span><span style="white-space:nowrap">{{ t.procEyebrow }}</span><span style="width:48px;flex:none;height:1px;background:linear-gradient(90deg,#C9A04A,rgba(201,160,74,0))"></span></div>
+      <h2 style="margin:0;font-weight:600;letter-spacing:-.01em;font-size:clamp(28px,4vw,52px);line-height:1.1;text-wrap:balance">{{ t.procTitleA }} <span style="color:#E8C77A">{{ t.procTitleB }}</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:32px">
+      <sc-for list="{{ t.steps }}" as="s" hint-placeholder-count="4">
+        <div data-reveal="1" style="display:flex;flex-direction:column;gap:12px;padding-top:22px;border-top:1px solid rgba(201,160,74,.4)">
+          <span style="font-size:11px;font-weight:600;letter-spacing:.3em;color:#C9A04A">{{ s.n }}</span>
+          <h3 style="margin:0;font-weight:600;font-size:19px">{{ s.t }}</h3>
+          <p style="margin:0;font-size:14px;line-height:1.7;color:#A39E94;text-wrap:pretty">{{ s.d }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="faq" data-screen-label="07 FAQ" style="padding:{{ secPad }}">
+  <div style="max-width:1000px;margin:0 auto">
+    <div data-reveal="1" style="display:flex;flex-direction:column;gap:16px;margin-bottom:36px">
+      <div style="display:flex;align-items:center;gap:12px;font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#C9A04A"><span style="width:8px;height:8px;transform:rotate(45deg);border:1px solid #C9A04A;flex:none"></span><span style="white-space:nowrap">{{ t.faqEyebrow }}</span><span style="width:48px;flex:none;height:1px;background:linear-gradient(90deg,#C9A04A,rgba(201,160,74,0))"></span></div>
+      <h2 style="margin:0;font-weight:600;letter-spacing:-.01em;font-size:clamp(28px,4vw,52px);line-height:1.1">{{ t.faqTitle }}</h2>
+    </div>
+    <div style="border-top:1px solid rgba(201,160,74,.2)">
+      <sc-for list="{{ faq }}" as="f" hint-placeholder-count="5">
+        <div style="border-bottom:1px solid rgba(201,160,74,.2)">
+          <button onClick="{{ f.toggle }}" style="width:100%;min-height:68px;padding:20px 0;background:none;border:none;color:#F2EEE6;display:flex;justify-content:space-between;align-items:center;gap:20px;cursor:pointer;text-align:left;font-weight:600;font-size:clamp(15px,1.6vw,18px);line-height:1.4">
+            <span>{{ f.q }}</span>
+            <span style="flex:none;width:36px;height:36px;border:1px solid rgba(201,160,74,.45);display:flex;align-items:center;justify-content:center;color:#E8C77A;font-size:18px;font-weight:400;transition:transform .35s;transform:{{ f.rot }}">+</span>
+          </button>
+          <div style="display:grid;grid-template-rows:{{ f.rows }};transition:grid-template-rows .45s ease">
+            <div style="overflow:hidden">
+              <p style="margin:0 0 24px;max-width:760px;font-size:14px;line-height:1.75;color:#A39E94">{{ f.a }}</p>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<section id="contacts" data-screen-label="08 Contacts" style="position:relative;overflow:hidden;padding:{{ secPad }};background:#0E0E0F;border-top:1px solid rgba(201,160,74,.25);text-align:center">
+  <div style="position:absolute;bottom:-40%;left:50%;width:1000px;height:700px;transform:translateX(-50%);background:radial-gradient(ellipse at center, rgba(201,160,74,.16), rgba(201,160,74,0) 60%);pointer-events:none"></div>
+  <div data-reveal="1" style="position:relative;max-width:820px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:22px">
+    <span style="font-size:11px;font-weight:600;letter-spacing:.22em;line-height:1.7;text-transform:uppercase;color:#C9A04A">{{ t.ctEyebrow }}</span>
+    <h2 style="margin:0;font-weight:600;letter-spacing:-.01em;font-size:clamp(30px,5vw,64px);line-height:1.08;text-wrap:balance">{{ t.ctTitleA }} <span style="color:#E8C77A">{{ t.ctTitleB }}</span></h2>
+    <p style="margin:0;font-size:15px;line-height:1.7;color:#A39E94;max-width:520px">{{ t.ctText }}</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;width:100%">
+      <a href="https://wa.me/77783647371" target="_blank" style="flex:1 1 260px;max-width:340px;display:flex;justify-content:center;align-items:center;white-space:nowrap;min-height:58px;padding:0 20px;background:#C9A04A;color:#0B0B0C;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;transition:background .3s" style-hover="background:#E8C77A;color:#0B0B0C">WhatsApp · +7 778 364 7371</a>
+      <a href="https://instagram.com/hightone.group" target="_blank" style="flex:1 1 260px;max-width:340px;display:flex;justify-content:center;align-items:center;white-space:nowrap;min-height:58px;padding:0 20px;border:1px solid rgba(201,160,74,.5);color:#E8C77A;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;transition:all .3s" style-hover="background:rgba(201,160,74,.1);color:#F4DDA0">Instagram · @hightone.group</a>
+    </div>
+  </div>
+</section>
+
+<footer style="padding:44px clamp(18px,4vw,48px) 36px;border-top:1px solid rgba(201,160,74,.15)">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:24px 32px;flex-wrap:wrap">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="width:30px;height:40px;background:url(assets/logo.png) -59.5px -31px / 145px auto no-repeat;flex:none"></div>
+      <div style="display:flex;flex-direction:column;line-height:1">
+        <span style="font-size:14px;font-weight:600;letter-spacing:.3em">HIGHTONE</span>
+        <span style="font-size:9px;font-weight:500;letter-spacing:.6em;color:#C9A04A;margin-top:5px">GROUP</span>
+      </div>
+    </div>
+    <div style="display:flex;gap:12px 28px;flex-wrap:wrap;font-size:13px;color:#A39E94">
+      <span>{{ t.footer }}</span>
+      <a href="https://wa.me/77783647371" target="_blank">+7 778 364 7371</a>
+      <a href="https://instagram.com/hightone.group" target="_blank">@hightone.group</a>
+    </div>
+    <span style="font-size:12px;color:#7C776E">© 2026 Hightone Group</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/77783647371" target="_blank" aria-label="WhatsApp" style="position:fixed;right:18px;bottom:18px;z-index:40;width:58px;height:58px;border-radius:50%;background:#C9A04A;color:#0B0B0C;display:flex;align-items:center;justify-content:center;animation:ht-pulse 2.6s infinite;transition:transform .3s, opacity .3s;opacity:{{ fabOp }}" style-hover="transform:scale(1.08);color:#0B0B0C">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.200-.2.2-.3.2-.6.1-.3-.1-1.300-.5-2.400-1.500-.9-.8-1.500-1.800-1.700-2.100-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.500s1.100 2.900 1.200 3.100c.1.2 2.100 3.200 5.100 4.500.7.3 1.300.5 1.700.6.7.2 1.400.2 1.900.1.6-.1 1.800-.7 2-1.400.2-.7.2-1.300.2-1.400-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.600 15.100L2 22l5-1.300A10 10 0 1 0 12 2zm0 18.200c-1.500 0-3-.4-4.200-1.200l-.3-.2-3 .8.8-2.900-.2-.3A8.200 8.200 0 1 1 12 20.200z"></path></svg>
+</a>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;catalogLayout&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;showcase&quot;,&quot;carousel&quot;],&quot;default&quot;:&quot;showcase&quot;,&quot;tsType&quot;:&quot;'showcase' | 'carousel'&quot;,&quot;section&quot;:&quot;Каталог (десктоп)&quot;}}">
+const T = {
+  ru: {
+    nav: ['Каталог', 'До / После', 'Расчёт', 'Этапы', 'Вопросы', 'Контакты'],
+    heroEyebrow: 'Премиальные натяжные потолки · Астана',
+    heroA: 'Натяжные потолки', heroB: 'нового уровня',
+    heroSub: 'Свет · Архитектура пространства',
+    bullets: ['Премиум материалы', 'Современное освещение', 'Чистый монтаж', 'Гарантия качества'],
+    priceLabel: 'Потолки под ключ', pricePre: 'от', priceVal: '1 490 ₸', pricePost: 'за м²',
+    ctaCalc: 'Рассчитать стоимость', ctaMeasure: 'Бесплатный замер', heroBadge: 'Свет как архитектура',
+    pillars: [
+      { n: '01', t: 'Премиум материалы', d: 'Полотна и профили от проверенных производителей. Без запаха, ровная фактура, долгий срок службы.' },
+      { n: '02', t: 'Современное освещение', d: 'Световые линии, треки, скрытые софиты и парящие потолки — свет проектируется вместе с потолком.' },
+      { n: '03', t: 'Чистый монтаж', d: 'Защищаем мебель и полы, работаем аккуратно и убираем за собой.' },
+      { n: '04', t: 'Гарантия качества', d: 'Даём гарантию на материалы и работы. Фиксируем стоимость в договоре.' }
+    ],
+    catEyebrow: 'Каталог решений', catTitleA: 'Профили, свет и', catTitleB: 'архитектурные узлы',
+    catNote: 'Цены ориентировочные. Точная смета — после бесплатного замера.',
+    filters: { all: 'Все', light: 'Свет', profile: 'Профили', detail: 'Детали' },
+    pre: 'от', suffix: '', units: { m: 'за м.п.', pc: 'за шт' }, of: 'из',
+    ask: 'Узнать подробнее', askMsg: n => `Здравствуйте! Интересует «${n}». Подскажите подробнее?`,
+    baEyebrow: 'До и после', baTitleA: 'Тот же интерьер.', baTitleB: 'Другой уровень.', baHint: 'Потяните ползунок, чтобы сравнить.',
+    before: 'До', after: 'После', phBefore: 'Фото ДО', phAfter: 'Фото ПОСЛЕ',
+    ba: [{ title: 'Гостиная', note: 'Парящий потолок + световые линии' }, { title: 'Кухня', note: 'Теневой профиль + магнитный трек' }, { title: 'Спальня', note: 'Скрытый софит BH-10' }],
+    calcEyebrow: 'Расчёт стоимости', calcTitleA: 'Узнайте цену', calcTitleB: 'за минуту',
+    calcText: 'Предварительный расчёт по площади, типу полотна и освещению. Отправьте его нам в WhatsApp — уточним детали и запишем на замер.',
+    area: 'Площадь', canvas: 'Полотно', edge: 'Примыкание к стене', lightsLabel: 'Софиты GX-53', lightsPrice: '3 500 ₸ / шт',
+    types: ['Матовый', 'Сатиновый', 'Глянцевый', 'Тканевый'], profs: ['Стандарт', 'Теневой', 'Парящий'], incl: 'включено', perM: '₸/м.п.',
+    total: 'Итого, ориентировочно', sendCalc: 'Отправить расчёт в WhatsApp',
+    breakdown: (a, p, per, l) => `${a} м² × ${p} ₸ · периметр ≈ ${per} м · софитов: ${l}`,
+    msg: (a, ty, pr, l, tot) => `Здравствуйте! Хочу рассчитать потолок: ${a} м², полотно — ${ty}, примыкание — ${pr}, софитов — ${l}. Предварительно ${tot} ₸.`,
+    procEyebrow: 'Как мы работаем', procTitleA: 'От замера', procTitleB: 'до света',
+    steps: [
+      { n: 'ЭТАП 01', t: 'Бесплатный замер', d: 'Приезжаем в удобное время, снимаем размеры, показываем образцы полотен и профилей.' },
+      { n: 'ЭТАП 02', t: 'Проект и смета', d: 'Подбираем световые решения и фиксируем стоимость. Без скрытых доплат.' },
+      { n: 'ЭТАП 03', t: 'Чистый монтаж', d: 'Устанавливаем потолок и свет, защищаем интерьер, убираем после работ.' },
+      { n: 'ЭТАП 04', t: 'Гарантия', d: 'Передаём объект и гарантийные документы. Остаёмся на связи после сдачи.' }
+    ],
+    faqEyebrow: 'Частые вопросы', faqTitle: 'Коротко о главном',
+    faq: [
+      { q: 'Что входит в цену «под ключ»?', a: 'Полотно, базовый профиль, монтаж и уборка после работ. Профили, световые линии и светильники рассчитываются отдельно — по каталогу выше.' },
+      { q: 'Сколько длится монтаж?', a: 'Срок зависит от площади и сложности световых решений. Точное время работ называем после замера и согласования проекта.' },
+      { q: 'Будет ли грязь и пыль?', a: 'Мы работаем аккуратно: защищаем мебель и полы, убираем за собой. После монтажа помещение готово к использованию.' },
+      { q: 'Замер платный?', a: 'Нет, замер по Астане бесплатный. Специалист снимет размеры, покажет образцы и подготовит смету.' },
+      { q: 'Можно ли сделать свет без видимых светильников?', a: 'Да. Для этого используют световые линии, скрытый софит BH-10, парящий профиль и магнитные треки, встроенные в плоскость потолка.' }
+    ],
+    ctEyebrow: 'Бесплатный замер · Астана', ctTitleA: 'Обсудим ваш', ctTitleB: 'потолок?',
+    ctText: 'Напишите в WhatsApp — ответим, рассчитаем стоимость и согласуем время замера.',
+    footer: 'Натяжные потолки · Астана',
+    cat: {
+      diffuser: ['Диффузор (теневой)', 'Вентиляция', 'Скрытая вентиляционная щель по периметру: воздухообмен без решёток на потолке.'],
+      shadow: ['Теневой профиль', 'Примыкание', 'Аккуратный теневой зазор между полотном и стеной вместо плинтуса.'],
+      pk15: ['ПК-15 алюминиевый', 'Профиль', 'Алюминиевый профиль для чистых примыканий и световых решений.'],
+      bh10: ['BH-10 скрытый софит', 'Свет', 'Ниша со скрытой подсветкой: мягкий свет без видимых источников.'],
+      line: ['Световая линия', 'Свет', 'Линии света в плоскости потолка: основной свет и графика интерьера.'],
+      magnet: ['Магнитный трек', 'Свет', 'Встроенная шина с магнитными светильниками. Состав и положение света меняются без ремонта.'],
+      am1: ['АМ-1', 'Профиль', 'Профиль для архитектурных узлов и переходов между уровнями.'],
+      surface: ['Накладной трек', 'Свет', 'Трековая система поверх полотна для спотов, подвесов и линейных модулей.'],
+      pk14: ['ПК-14 алюминиевый', 'Профиль', 'Алюминиевый профиль для световых решений и сложных узлов.'],
+      insert: ['Вставка', 'Отделка', 'Декоративная вставка, закрывающая зазор между полотном и стеной.'],
+      gx53: ['Софиты GX-53', 'Свет', 'Точечные светильники для равномерного общего света.'],
+      floating: ['Парящий', 'Свет', 'Подсветка по периметру: потолок визуально «парит» над стенами.']
+    }
+  },
+  kz: {
+    nav: ['Каталог', 'Дейін / Кейін', 'Есептеу', 'Кезеңдер', 'Сұрақтар', 'Байланыс'],
+    heroEyebrow: 'Премиум керме төбелер · Астана',
+    heroA: 'Жаңа деңгейдегі', heroB: 'керме төбелер',
+    heroSub: 'Жарық · Кеңістік сәулеті',
+    bullets: ['Премиум материалдар', 'Заманауи жарықтандыру', 'Таза монтаж', 'Сапа кепілдігі'],
+    priceLabel: 'Толық дайын төбе', pricePre: '1 м² үшін', priceVal: '1 490 ₸-ден', pricePost: 'бастап',
+    ctaCalc: 'Бағасын есептеу', ctaMeasure: 'Тегін өлшеу', heroBadge: 'Жарық — сәулет өнері',
+    pillars: [
+      { n: '01', t: 'Премиум материалдар', d: 'Сенімді өндірушілердің кенептері мен профильдері. Иіссіз, тегіс бет, ұзақ қызмет мерзімі.' },
+      { n: '02', t: 'Заманауи жарықтандыру', d: 'Жарық сызықтары, тректер, жасырын софиттер және қалқымалы төбелер — жарық төбемен бірге жобаланады.' },
+      { n: '03', t: 'Таза монтаж', d: 'Жиһаз бен еденді қорғаймыз, ұқыпты жұмыс істеп, артымыздан жинаймыз.' },
+      { n: '04', t: 'Сапа кепілдігі', d: 'Материалдар мен жұмысқа кепілдік береміз. Бағаны шартта бекітеміз.' }
+    ],
+    catEyebrow: 'Шешімдер каталогы', catTitleA: 'Профильдер, жарық және', catTitleB: 'сәулеттік түйіндер',
+    catNote: 'Бағалар шамамен көрсетілген. Нақты смета тегін өлшеуден кейін жасалады.',
+    filters: { all: 'Барлығы', light: 'Жарық', profile: 'Профильдер', detail: 'Бөлшектер' },
+    pre: '', suffix: '-ден', units: { m: '1 қ.м. үшін', pc: '1 дана үшін' }, of: '/',
+    ask: 'Толығырақ білу', askMsg: n => `Сәлеметсіз бе! «${n}» қызықтырады. Толығырақ айтып бере аласыз ба?`,
+    baEyebrow: 'Дейін және кейін', baTitleA: 'Сол интерьер.', baTitleB: 'Басқа деңгей.', baHint: 'Салыстыру үшін жүгірткіні жылжытыңыз.',
+    before: 'Дейін', after: 'Кейін', phBefore: 'ДЕЙІН суреті', phAfter: 'КЕЙІН суреті',
+    ba: [{ title: 'Қонақ бөлме', note: 'Қалқымалы төбе + жарық сызықтары' }, { title: 'Ас үй', note: 'Көлеңкелі профиль + магниттік трек' }, { title: 'Жатын бөлме', note: 'BH-10 жасырын софиті' }],
+    calcEyebrow: 'Бағаны есептеу', calcTitleA: 'Бағасын', calcTitleB: 'бір минутта біліңіз',
+    calcText: 'Аудан, кенеп түрі және жарық бойынша алдын ала есеп. Оны WhatsApp-қа жіберіңіз — мәліметтерді нақтылап, өлшеуге жазамыз.',
+    area: 'Аудан', canvas: 'Кенеп', edge: 'Қабырғаға жалғасуы', lightsLabel: 'GX-53 софиттері', lightsPrice: '3 500 ₸ / дана',
+    types: ['Күңгірт', 'Сатин', 'Жылтыр', 'Матадан'], profs: ['Стандарт', 'Көлеңкелі', 'Қалқымалы'], incl: 'бағаға кіреді', perM: '₸/қ.м.',
+    total: 'Барлығы, шамамен', sendCalc: 'Есепті WhatsApp-қа жіберу',
+    breakdown: (a, p, per, l) => `${a} м² × ${p} ₸ · периметр ≈ ${per} м · софит: ${l}`,
+    msg: (a, ty, pr, l, tot) => `Сәлеметсіз бе! Төбені есептегім келеді: ${a} м², кенеп — ${ty}, жалғасуы — ${pr}, софит саны — ${l}. Алдын ала есеп: ${tot} ₸.`,
+    procEyebrow: 'Біз қалай жұмыс істейміз', procTitleA: 'Өлшеуден', procTitleB: 'жарыққа дейін',
+    steps: [
+      { n: '01-КЕЗЕҢ', t: 'Тегін өлшеу', d: 'Ыңғайлы уақытта келіп, өлшемдерді аламыз, кенеп пен профиль үлгілерін көрсетеміз.' },
+      { n: '02-КЕЗЕҢ', t: 'Жоба және смета', d: 'Жарық шешімдерін таңдап, бағаны бекітеміз. Жасырын қосымша төлемдер жоқ.' },
+      { n: '03-КЕЗЕҢ', t: 'Таза монтаж', d: 'Төбе мен жарықты орнатамыз, интерьерді қорғаймыз, жұмыстан кейін жинаймыз.' },
+      { n: '04-КЕЗЕҢ', t: 'Кепілдік', d: 'Нысанды кепілдік құжаттарымен тапсырамыз. Тапсырғаннан кейін де байланыстамыз.' }
+    ],
+    faqEyebrow: 'Жиі қойылатын сұрақтар', faqTitle: 'Негізгісі қысқаша',
+    faq: [
+      { q: '«Толық дайын» бағасына не кіреді?', a: 'Кенеп, негізгі профиль, монтаж және жұмыстан кейінгі тазалау. Профильдер, жарық сызықтары мен шамдар жоғарыдағы каталог бойынша бөлек есептеледі.' },
+      { q: 'Монтаж қанша уақыт алады?', a: 'Мерзім аудан мен жарық шешімдерінің күрделілігіне байланысты. Нақты уақытты өлшеу мен жобаны келіскеннен кейін айтамыз.' },
+      { q: 'Шаң-тозаң бола ма?', a: 'Біз ұқыпты жұмыс істейміз: жиһаз бен еденді қорғап, артымыздан жинаймыз. Монтаждан кейін бөлмені бірден пайдалануға болады.' },
+      { q: 'Өлшеу ақылы ма?', a: 'Жоқ, Астана бойынша өлшеу тегін. Маман өлшемдерді алып, үлгілерді көрсетеді және смета дайындайды.' },
+      { q: 'Шамдары көрінбейтін жарық жасауға бола ма?', a: 'Иә. Ол үшін төбе жазықтығына кіріктірілген жарық сызықтары, BH-10 жасырын софиті, қалқымалы профиль және магниттік тректер қолданылады.' }
+    ],
+    ctEyebrow: 'Тегін өлшеу · Астана', ctTitleA: 'Төбеңізді', ctTitleB: 'талқылайық па?',
+    ctText: 'WhatsApp-қа жазыңыз — жауап береміз, бағасын есептеп, өлшеу уақытын келісеміз.',
+    footer: 'Керме төбелер · Астана',
+    cat: {
+      diffuser: ['Диффузор (көлеңкелі)', 'Желдету', 'Периметр бойынша жасырын желдету саңылауы: төбеде торсыз ауа алмасу.'],
+      shadow: ['Көлеңкелі профиль', 'Жалғасу', 'Плинтустың орнына кенеп пен қабырға арасындағы ұқыпты көлеңкелі саңылау.'],
+      pk15: ['ПК-15 алюминий', 'Профиль', 'Таза жалғасулар мен жарық шешімдеріне арналған алюминий профиль.'],
+      bh10: ['BH-10 жасырын софит', 'Жарық', 'Жасырын жарығы бар ниша: көзге көрінбейтін жұмсақ жарық.'],
+      line: ['Жарық сызығы', 'Жарық', 'Төбе жазықтығындағы жарық сызықтары: негізгі жарық әрі интерьер графикасы.'],
+      magnet: ['Магниттік трек', 'Жарық', 'Магниттік шамдары бар кіріктірілген шина. Жарықтың құрамы мен орнын жөндеусіз өзгертуге болады.'],
+      am1: ['АМ-1', 'Профиль', 'Сәулеттік түйіндер мен деңгейлер арасындағы өтпелерге арналған профиль.'],
+      surface: ['Үстіңгі трек', 'Жарық', 'Кенептің үстіне орнатылатын трек жүйесі: споттар, аспалы шамдар, сызықтық модульдер.'],
+      pk14: ['ПК-14 алюминий', 'Профиль', 'Жарық шешімдері мен күрделі түйіндерге арналған алюминий профиль.'],
+      insert: ['Қосымша жолақ', 'Әрлеу', 'Кенеп пен қабырға арасындағы саңылауды жабатын сәндік жолақ.'],
+      gx53: ['GX-53 софиттері', 'Жарық', 'Біркелкі жалпы жарыққа арналған нүктелік шамдар.'],
+      floating: ['Қалқымалы', 'Жарық', 'Периметр бойынша жарық: төбе қабырғалардан «қалқып» тұрғандай көрінеді.']
+    }
+  }
+};
+const CAT = [
+  ['diffuser', 'detail', 9000, 'm'], ['shadow', 'profile', 4500, 'm'], ['pk15', 'profile', 5500, 'm'], ['bh10', 'light', 7000, 'm'],
+  ['line', 'light', 12000, 'm'], ['magnet', 'light', 18000, 'm'], ['am1', 'profile', 6500, 'm'], ['surface', 'light', 14000, 'm'],
+  ['pk14', 'profile', 5000, 'm'], ['insert', 'detail', 500, 'm'], ['gx53', 'light', 3500, 'pc'], ['floating', 'light', 8000, 'm']
+];
+const IDS = { diffuser: 'cat-diffuser', shadow: 'cat-shadow', pk15: 'cat-pk15', bh10: 'cat-bh10', line: 'cat-line', magnet: 'cat-magnet', am1: 'cat-am1', surface: 'cat-surface', pk14: 'cat-pk14', insert: 'cat-insert', gx53: 'cat-gx53', floating: 'cat-floating' };
+const PHOTOS = { diffuser: 'assets/photos/diffuser.jpg', shadow: 'assets/photos/shadow.jpg', pk15: 'assets/photos/pk15.jpg', bh10: 'assets/photos/bh10.jpg', line: 'assets/photos/line.jpg', magnet: 'assets/photos/magnet.jpg', am1: 'assets/photos/am1.jpg', surface: 'assets/photos/surface.jpg', pk14: 'assets/photos/pk14.jpg', insert: 'assets/photos/insert.jpg', gx53: 'assets/photos/gx53.jpg', floating: 'assets/photos/floating.jpg' };
+const BA_SRC = [['assets/photos/ba1-before.jpg', 'assets/photos/ba1-after.jpg'], ['assets/photos/ba2-before.jpg', 'assets/photos/ba2-after.jpg'], ['assets/photos/ba3-before.jpg', 'assets/photos/ba3-after.jpg']];
+const HREFS = ['#catalog', '#ba', '#calc', '#process', '#faq', '#contacts'];
+
+class Component extends DCLogic {
+  state = { lang: (typeof localStorage !== 'undefined' && localStorage.getItem('ht-lang')) || 'ru', w: typeof window !== 'undefined' ? window.innerWidth : 1280, scrolled: false, menuOpen: false, ba: 0, pos: 50, area: 20, type: 0, prof: 0, lights: 6, faq: 0, cat: 'all', catP: 0, catV: 0.3 };
+
+  componentDidMount() {
+    this.onResize = () => { const w = document.documentElement.clientWidth || window.innerWidth; if (w !== this.state.w) this.setState({ w }); this.catScroll(); };
+    this.onScroll = () => { const s = window.scrollY > 40; if (s !== this.state.scrolled) this.setState({ scrolled: s }); this.checkReveal(); };
+    window.addEventListener('resize', this.onResize);
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    document.documentElement.lang = this.state.lang === 'kz' ? 'kk' : 'ru';
+    this.onResize();
+    if ('ResizeObserver' in window) { this.ro = new ResizeObserver(() => this.onResize()); this.ro.observe(document.documentElement); }
+    setTimeout(() => { this.onResize(); this.armReveal(); this.onScroll(); }, 60);
+  }
+  componentDidUpdate(pp, ps) {
+    if (ps.menuOpen !== this.state.menuOpen) document.body.style.overflow = this.state.menuOpen ? 'hidden' : '';
+    if (ps.cat !== this.state.cat && this.catEl) { this.catEl.scrollLeft = 0; setTimeout(() => this.catScroll(), 30); }
+  }
+  armReveal() {
+    const vh = window.innerHeight;
+    document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+      if (el.dataset.rv) return;
+      if (el.getBoundingClientRect().top < vh * 0.92) { el.dataset.rv = 'done'; return; }
+      el.dataset.rv = 'wait';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1), border-color .4s, background .4s';
+      el.style.transitionDelay = ((i % 4) * 0.08) + 's';
+    });
+  }
+  checkReveal() {
+    const vh = window.innerHeight;
+    document.querySelectorAll('[data-rv="wait"]').forEach(el => {
+      if (el.getBoundingClientRect().top < vh * 0.92) { el.dataset.rv = 'done'; el.style.opacity = '1'; el.style.transform = 'none'; }
+    });
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    this.ro && this.ro.disconnect();
+    window.removeEventListener('scroll', this.onScroll);
+    document.body.style.overflow = '';
+    document.querySelectorAll('[data-reveal]').forEach(el => { el.style.opacity = '1'; el.style.transform = 'none'; delete el.dataset.rv; });
+  }
+
+  catRef = el => { this.catEl = el; };
+  catScroll = () => {
+    const el = this.catEl; if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    this.setState({ catP: max > 0 ? el.scrollLeft / max : 0, catV: Math.min(1, el.clientWidth / el.scrollWidth) });
+  };
+  catStep = dir => { const el = this.catEl; if (!el) return; const card = el.querySelector('article'); el.scrollBy({ left: dir * ((card ? card.offsetWidth : 320) + 16), behavior: 'smooth' }); };
+
+  baDown = e => { this.drag = true; e.currentTarget.setPointerCapture(e.pointerId); this.baMove(e); };
+  baMove = e => {
+    if (!this.drag) return;
+    const r = e.currentTarget.parentElement.getBoundingClientRect();
+    this.setState({ pos: Math.max(0, Math.min(100, ((e.clientX - r.left) / r.width) * 100)) });
+  };
+  baUp = () => { this.drag = false; };
+
+  setLang(l) {
+    if (l === this.state.lang || this.switching) return;
+    this.switching = true;
+    try { localStorage.setItem('ht-lang', l); } catch (e) {}
+    this.setState({ pill: l });
+    const els = Array.from(document.querySelectorAll('section h1, section h2, section h3, section p, section button, section a, section span, header nav, footer span, [data-ht-menu] a'))
+      .filter(el => el.getBoundingClientRect().bottom > -50 && el.getBoundingClientRect().top < window.innerHeight + 50 && !el.querySelector('image-slot') && !el.closest('image-slot'));
+    const saved = els.map(el => ({ tr: el.style.transition, op: el.style.opacity }));
+    els.forEach(el => { el.style.transition = 'opacity .32s ease, filter .32s ease, color .3s'; el.style.opacity = '0'; el.style.filter = 'blur(6px)'; });
+    setTimeout(() => {
+      document.documentElement.lang = l === 'kz' ? 'kk' : 'ru';
+      this.setState({ lang: l }, () => requestAnimationFrame(() => {
+        els.forEach((el, i) => { el.style.transitionDelay = Math.min(i * 6, 240) + 'ms'; el.style.opacity = saved[i].op; el.style.filter = ''; });
+        setTimeout(() => { els.forEach((el, i) => { el.style.transitionDelay = ''; el.style.transition = saved[i].tr; }); this.switching = false; }, 800);
+      }));
+    }, 340);
+  }
+  fmt(n) { return Math.round(n).toLocaleString('ru-RU'); }
+
+  renderVals() {
+    const s = this.state;
+    const t = T[s.lang] || T.ru;
+    const isMobile = s.w < 1100, small = s.w < 640;
+    const gold = '#C9A04A';
+    const on = a => ({ bg: a ? gold : 'transparent', color: a ? '#0B0B0C' : '#E4DFD5', border: a ? gold : 'rgba(201,160,74,.3)' });
+
+    const all = CAT.map(([k, cat, p, u]) => ({ id: IDS[k], src: PHOTOS[k], cat, name: t.cat[k][0], tag: t.cat[k][1], desc: t.cat[k][2], ph: t.cat[k][0], pre: t.pre, price: this.fmt(p) + ' ₸' + t.suffix, unit: t.units[u] }));
+    const catalog = s.cat === 'all' ? all : all.filter(c => c.cat === s.cat);
+    const visible = Math.max(1, Math.round(catalog.length * s.catV));
+    const first = Math.min(catalog.length, Math.round(s.catP * (catalog.length - visible)) + 1);
+
+    const types = [1490, 1690, 1990, 4500], profs = [0, 4500, 8000];
+    const perim = Math.round(4 * Math.sqrt(s.area));
+    const total = s.area * types[s.type] + perim * profs[s.prof] + s.lights * 3500;
+    const typeName = t.types[s.type].toLowerCase(), profName = t.profs[s.prof].toLowerCase();
+
+    const layout = this.props.catalogLayout ?? 'showcase';
+    const useShowcase = !isMobile && layout === 'showcase';
+    const selIdx = Math.max(0, catalog.findIndex(c => c.id === s.sel));
+    const showList = catalog.map((c, i) => {
+      const a = i === selIdx;
+      return { ...c, num: String(i + 1).padStart(2, '0'), select: () => { if (s.sel !== c.id) this.setState({ sel: c.id }); },
+        rowBg: a ? 'rgba(201,160,74,.1)' : 'transparent', rowColor: a ? '#E8C77A' : '#E4DFD5', arrowOp: a ? 1 : 0, arrowTf: a ? 'none' : 'translateX(-8px)',
+        op: a ? 1 : 0, pe: a ? 'auto' : 'none', imgTf: a ? 'scale(1)' : 'scale(1.04)' };
+    });
+    const selC = showList[selIdx] || showList[0] || {};
+    const sel = { ...selC, wa: 'https://wa.me/77783647371?text=' + encodeURIComponent(t.askMsg(selC.name || '')) };
+
+    return {
+      t, isMobile, isDesktop: !isMobile, small, notSmall: !small,
+      useShowcase, useCarousel: !useShowcase, showArrows: !isMobile && !useShowcase,
+      showList, sel, showTotal: String(showList.length).padStart(2, '0'),
+      nav: t.nav.slice(0, 5).map((l, i) => ({ label: l, href: HREFS[i] })),
+      menuItems: t.nav.map((l, i) => ({ label: l, href: HREFS[i], n: '0' + (i + 1), op: s.menuOpen ? 1 : 0, tf: s.menuOpen ? 'none' : 'translateY(24px)', delay: s.menuOpen ? (0.18 + i * 0.06) + 's' : '0s' })),
+      menuClip: s.menuOpen ? 'inset(0 0 0 0)' : 'inset(0 0 100% 0)',
+      menuPE: s.menuOpen ? 'auto' : 'none',
+      menuFootOp: s.menuOpen ? 1 : 0, menuFootTf: s.menuOpen ? 'none' : 'translateY(20px)',
+      b1: s.menuOpen ? 'translateY(5px) rotate(45deg)' : 'none',
+      b2: s.menuOpen ? 0 : 1, b2t: s.menuOpen ? 'scaleX(0)' : 'none',
+      b3: s.menuOpen ? 'translateY(-5px) rotate(-45deg)' : 'none',
+      headerBg: s.menuOpen ? 'rgba(11,11,12,1)' : s.scrolled ? 'rgba(11,11,12,.86)' : 'rgba(11,11,12,0)',
+      headerBorder: s.scrolled || s.menuOpen ? 'rgba(201,160,74,.18)' : 'rgba(201,160,74,0)',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      fabOp: s.menuOpen ? 0 : 1,
+      setRu: () => this.setLang('ru'), setKz: () => this.setLang('kz'),
+      langPill: (s.pill || s.lang) === 'kz' ? 'translateX(44px)' : 'none',
+      ruColor: (s.pill || s.lang) === 'ru' ? '#0B0B0C' : '#CFC9BE', kzColor: (s.pill || s.lang) === 'kz' ? '#0B0B0C' : '#CFC9BE',
+      heroPad: small ? '104px 18px 56px' : '120px clamp(20px,4vw,48px) 80px',
+      heroAspect: small ? '4/3' : '4/5',
+      secPad: small ? '72px 18px' : 'clamp(80px,10vw,140px) clamp(20px,4vw,48px)',
+      heroLines: React.createElement('div', { style: { position: 'absolute', inset: 0, pointerEvents: 'none' } },
+        [7, 9.5, 12].map((top, i) => React.createElement('div', { key: i, style: { position: 'absolute', top: top + '%', left: 0, right: 0, height: 1, transformOrigin: i % 2 ? 'right' : 'left', animation: `ht-draw 1.8s ${0.3 + i * 0.25}s cubic-bezier(.7,0,.2,1) both` } },
+          React.createElement('div', { style: { width: '100%', height: '100%', background: 'linear-gradient(90deg, rgba(201,160,74,0), rgba(232,199,122,.55), rgba(201,160,74,0))', backgroundSize: '200% 100%', animation: `ht-shimmer ${7 + i * 2}s linear infinite, ht-glow 4s ${i}s ease-in-out infinite` } })))),
+      marquee: React.createElement('div', { style: { display: 'flex', width: 'max-content', animation: 'ht-marquee 50s linear infinite' } },
+        [0, 1].map(k => React.createElement('div', { key: k, style: { display: 'flex', gap: 40, paddingRight: 40, alignItems: 'center' } },
+          all.map((c, i) => React.createElement(React.Fragment, { key: i },
+            React.createElement('span', { style: { fontSize: 14, fontWeight: 600, letterSpacing: '.2em', textTransform: 'uppercase', color: '#E4DFD5', whiteSpace: 'nowrap' } }, c.name),
+            React.createElement('span', { style: { width: 6, height: 6, background: gold, transform: 'rotate(45deg)', flex: 'none' } })))))),
+      catFilters: ['all', 'light', 'profile', 'detail'].map(k => ({ label: t.filters[k], count: k === 'all' ? all.length : all.filter(c => c.cat === k).length, ...on(s.cat === k), select: () => this.setState({ cat: k }) })),
+      catalog, catRef: this.catRef, catScroll: this.catScroll,
+      catPrev: () => this.catStep(-1), catNext: () => this.catStep(1),
+      cardW: small ? '82vw' : '320px',
+      catBarW: (s.catV * 100) + '%', catBarLeft: (s.catP * (1 - s.catV) * 100) + '%',
+      catCounter: (visible >= catalog.length ? catalog.length : `${first}–${Math.min(catalog.length, first + visible - 1)}`) + ' ' + t.of + ' ' + catalog.length,
+      baTabs: t.ba.map((b, i) => ({ title: b.title, select: () => this.setState({ ba: i, pos: 50 }), bg: i === s.ba ? gold : 'transparent', color: i === s.ba ? '#0B0B0C' : '#E8C77A' })),
+      baItems: t.ba.map((b, i) => ({ ...b, beforeId: `ba${i + 1}-before`, afterId: `ba${i + 1}-after`, beforeSrc: BA_SRC[i][0], afterSrc: BA_SRC[i][1], display: i === s.ba ? 'flex' : 'none' })),
+      baAspect: small ? '4/3' : '16/9',
+      baClip: `inset(0 ${100 - s.pos}% 0 0)`, baLeft: s.pos + '%',
+      baDown: this.baDown, baMove: this.baMove, baUp: this.baUp,
+      area: s.area, areaPct: ((s.area - 5) / 145 * 100) + '%',
+      setArea: e => this.setState({ area: +e.target.value }),
+      areaDec: () => this.setState({ area: Math.max(5, s.area - 1) }),
+      areaInc: () => this.setState({ area: Math.min(150, s.area + 1) }),
+      typeOpts: types.map((p, i) => ({ n: t.types[i], p: this.fmt(p) + ' ₸/м²', ...on(i === s.type), select: () => this.setState({ type: i }) })),
+      profOpts: profs.map((p, i) => ({ n: t.profs[i], p: p ? '+' + this.fmt(p) + ' ' + t.perM : t.incl, ...on(i === s.prof), select: () => this.setState({ prof: i }) })),
+      lights: s.lights,
+      lightsDec: () => this.setState({ lights: Math.max(0, s.lights - 1) }),
+      lightsInc: () => this.setState({ lights: Math.min(60, s.lights + 1) }),
+      total: this.fmt(total),
+      breakdown: t.breakdown(s.area, this.fmt(types[s.type]), perim, s.lights),
+      waCalc: 'https://wa.me/77783647371?text=' + encodeURIComponent(t.msg(s.area, typeName, profName, s.lights, this.fmt(total))),
+      faq: t.faq.map((f, i) => ({ ...f, rows: s.faq === i ? '1fr' : '0fr', rot: s.faq === i ? 'rotate(45deg)' : 'none', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
