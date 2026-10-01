@@ -472,9 +472,14 @@ const T = {
     filters: { all: 'Все', light: 'Свет', profile: 'Профили', detail: 'Детали' },
     pre: 'от', suffix: '', units: { m: 'за м.п.', pc: 'за шт' }, of: 'из',
     ask: 'Узнать подробнее', askMsg: n => `Здравствуйте! Интересует «${n}». Подскажите подробнее?`,
-    baEyebrow: 'До и после', baTitleA: 'Тот же интерьер.', baTitleB: 'Другой уровень.', baHint: 'Потяните ползунок, чтобы сравнить.',
+    baEyebrow: 'До и после', baTitleA: 'Черновой потолок.', baTitleB: 'И натяжной.', baHint: 'Потяните ползунок: слева потолок до монтажа, справа — как он выглядит с натяжным.',
     before: 'До', after: 'После', phBefore: 'Фото ДО', phAfter: 'Фото ПОСЛЕ',
-    ba: [{ title: 'Гостиная', note: 'Парящий потолок + световые линии' }, { title: 'Кухня', note: 'Теневой профиль + магнитный трек' }, { title: 'Спальня', note: 'Скрытый софит BH-10' }],
+    ba: [
+      { title: 'Парящий', note: 'Световые линии и контур по периметру' },
+      { title: 'У окна', note: 'Теневой профиль и магнитный трек' },
+      { title: 'Кабели', note: 'Световые линии вместо проводки' },
+      { title: 'Софиты', note: 'Свет в плоскости потолка' }
+    ],
     calcEyebrow: 'Расчёт стоимости', calcTitleA: 'Узнайте цену', calcTitleB: 'за минуту',
     calcText: 'Предварительный расчёт по площади, типу полотна и освещению. Отправьте его нам в WhatsApp — уточним детали и запишем на замер.',
     area: 'Площадь', canvas: 'Полотно', edge: 'Примыкание к стене', lightsLabel: 'Софиты GX-53', lightsPrice: '3 500 ₸ / шт',
@@ -534,9 +539,14 @@ const T = {
     filters: { all: 'Барлығы', light: 'Жарық', profile: 'Профильдер', detail: 'Бөлшектер' },
     pre: '', suffix: '-ден', units: { m: '1 қ.м. үшін', pc: '1 дана үшін' }, of: '/',
     ask: 'Толығырақ білу', askMsg: n => `Сәлеметсіз бе! «${n}» қызықтырады. Толығырақ айтып бере аласыз ба?`,
-    baEyebrow: 'Дейін және кейін', baTitleA: 'Сол интерьер.', baTitleB: 'Басқа деңгей.', baHint: 'Салыстыру үшін жүгірткіні жылжытыңыз.',
+    baEyebrow: 'Дейін және кейін', baTitleA: 'Қарапайым төбе.', baTitleB: 'Және керме.', baHint: 'Жүгірткіні жылжытыңыз: сол жақта монтажға дейінгі төбе, оң жақта — керме төбемен.',
     before: 'Дейін', after: 'Кейін', phBefore: 'ДЕЙІН суреті', phAfter: 'КЕЙІН суреті',
-    ba: [{ title: 'Қонақ бөлме', note: 'Қалқымалы төбе + жарық сызықтары' }, { title: 'Ас үй', note: 'Көлеңкелі профиль + магниттік трек' }, { title: 'Жатын бөлме', note: 'BH-10 жасырын софиті' }],
+    ba: [
+      { title: 'Қалқымалы', note: 'Жарық сызықтары және периметрлік контур' },
+      { title: 'Терезе', note: 'Көлеңкелі профиль және магниттік трек' },
+      { title: 'Сымдар', note: 'Сымдардың орнына жарық сызықтары' },
+      { title: 'Софиттер', note: 'Төбе жазықтығындағы жарық' }
+    ],
     calcEyebrow: 'Бағаны есептеу', calcTitleA: 'Бағасын', calcTitleB: 'бір минутта біліңіз',
     calcText: 'Аудан, кенеп түрі және жарық бойынша алдын ала есеп. Оны WhatsApp-қа жіберіңіз — мәліметтерді нақтылап, өлшеуге жазамыз.',
     area: 'Аудан', canvas: 'Кенеп', edge: 'Қабырғаға жалғасуы', lightsLabel: 'GX-53 софиттері', lightsPrice: '3 500 ₸ / дана',
@@ -585,7 +595,7 @@ const CAT = [
 ];
 const IDS = { diffuser: 'cat-diffuser', shadow: 'cat-shadow', pk15: 'cat-pk15', bh10: 'cat-bh10', line: 'cat-line', magnet: 'cat-magnet', am1: 'cat-am1', surface: 'cat-surface', pk14: 'cat-pk14', insert: 'cat-insert', gx53: 'cat-gx53', floating: 'cat-floating' };
 const PHOTOS = { diffuser: 'assets/photos/diffuser.jpg', shadow: 'assets/photos/shadow.jpg', pk15: 'assets/photos/pk15.jpg', bh10: 'assets/photos/bh10.jpg', line: 'assets/photos/line.jpg', magnet: 'assets/photos/magnet.jpg', am1: 'assets/photos/am1.jpg', surface: 'assets/photos/surface.jpg', pk14: 'assets/photos/pk14.jpg', insert: 'assets/photos/insert.jpg', gx53: 'assets/photos/gx53.jpg', floating: 'assets/photos/floating.jpg' };
-const BA_SRC = [['assets/photos/ba1-before.jpg', 'assets/photos/ba1-after.jpg'], ['assets/photos/ba2-before.jpg', 'assets/photos/ba2-after.jpg'], ['assets/photos/ba3-before.jpg', 'assets/photos/ba3-after.jpg']];
+const BA_SRC = [['assets/photos/ba1-before.jpg', 'assets/photos/ba1-after.jpg'], ['assets/photos/ba2-before.jpg', 'assets/photos/ba2-after.jpg'], ['assets/photos/ba3-before.jpg', 'assets/photos/ba3-after.jpg'], ['assets/photos/ba4-before.jpg', 'assets/photos/ba4-after.jpg']];
 const HREFS = ['#catalog', '#ba', '#calc', '#process', '#faq', '#contacts'];
 
 class Component extends DCLogic {
